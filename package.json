@@ -7,8 +7,12 @@
     "test": "test"
   },
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sean T Taylor",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "web3": "^1.2.9"
+  }
 }
