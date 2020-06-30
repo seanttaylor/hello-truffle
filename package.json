@@ -1,0 +1,14 @@
+{
+  "name": "hello-truffle",
+  "version": "0.0.1",
+  "description": "Maiden voyage with the Truffle Framework",
+  "main": "node index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sean T Taylor",
+  "license": "ISC"
+}
