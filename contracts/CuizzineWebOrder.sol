@@ -7,12 +7,14 @@ import "../lib/safemath.sol";
 contract CuizzineWebOrder {
     //constructor() public {}
 
-    event ReceivedWebOrder(
+    /*event ReceivedWebOrder(
         string order_id,
         string restaurant_id,
         string customer_id,
         uint256 totalETH
-    );
+    );*/
+
+    event ReceivedWebOrder(string order_id);
 
     struct WebOrder {
         string order_id;
@@ -23,12 +25,17 @@ contract CuizzineWebOrder {
         uint256 totalETH;
     }
 
-    function createOrder(WebOrder memory _myWebOrder) public {
-        emit ReceivedWebOrder(
-            _myWebOrder.order_id,
-            _myWebOrder.customer_id,
-            _myWebOrder.restaurant_id,
-            _myWebOrder.totalETH
-        );
+    function createOrder(uint256 order_id)
+        public
+        view
+        returns (uint256)
+    /*string memory order_id,
+        string memory customer_id,
+        string memory restaurant_id,
+        uint256 totalETH*/
+    {
+        return order_id;
+        //emit ReceivedWebOrder(order_id, customer_id, restaurant_id, totalETH);
+        //emit ReceivedWebOrder();
     }
 }
