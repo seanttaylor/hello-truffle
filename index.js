@@ -1,7 +1,6 @@
 /** DEPENDENCIES */
 const contractABI = require("./build/contracts/CuizzineWebOrder.json").abi;
-const contractAddress = "0xB5f27C0bdDb6F8ef810f919284745a075BfB5adD";
-
+const contractAddress = "0x0b82152Cc62e15Bd390649eCe96c170fc7375FBf";
 
 /** APPLICATION */
 (async function myApp({ contractABI, contractAddress }) {
@@ -18,29 +17,31 @@ const contractAddress = "0xB5f27C0bdDb6F8ef810f919284745a075BfB5adD";
         order_id: "XEO1reMLnJhlf7JcZNJB",
         customer_id: "UUCzbG5zdZ6VS4oPQyJK",
         restaurant_id: "8KbG1mFLeCMGSDZyEnL4",
-        //totalETH: 0.10082464543958122
         totalETH: myWeb3.utils.toWei("0.10082464543958122")
-
     };
 
     try {
-        const result = await myContract.methods.createOrder(1).call();
-        // await myContract.methods.createOrder("goo"/*myWebOrder.customer_id, myWebOrder.restaurant_id, myWebOrder.totalETH*/).call();
-        // myContract.events.ReceivedWebOrder()
-        //    .on("data", onReceivedWebOrder)
-        //    .on("error", onError);
+        myContract.events.ReceivedWebOrder()
+            .on("data", onReceivedWebOrder)
+            .on("error", onError);
+
+        const result = await myContract.methods.createOrder(myWebOrder.order_id).send({
+            from: customerWalletAddress
+        });
+        process.exit(0);
     } catch (e) {
-        console.info("Ensure you are CONNECTED to a test network. If using Ganache, verify the workspace is configured properly.")
+        console.warn("⚠️  Ensure you are CONNECTED to a test network. If using Ganache, verify the workspace is configured properly.");
         onError(e);
     }
 
-
-    function onReceivedWebOrder(data) {
-        console.info(data);
+    function onReceivedWebOrder({ returnValues }) {
+        const { order_id } = returnValues;
+        console.info(order_id);
     }
 
     function onError(error) {
         console.error(error);
+        process.exit(1);
     }
 
 }({

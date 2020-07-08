@@ -13,6 +13,7 @@
   "author": "Sean T Taylor",
   "license": "ISC",
   "dependencies": {
+    "@truffle/contract": "^4.2.11",
     "web3": "^1.2.9"
   }
 }
